@@ -4,12 +4,15 @@ import { STORE_CONFIG } from '../config';
 import { ShoppingCart, Plus, Eye } from 'lucide-react';
 import { motion } from 'motion/react';
 
+import { useLanguage } from '../context/LanguageContext';
+
 interface ProductCardProps {
   product: Product;
   onView: (product: Product) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, onView }) => {
+  const { lang, t } = useLanguage();
   const displayPrice = product.price;
 
   return (
@@ -57,18 +60,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onView }) => 
         <div className="mt-auto pt-4 border-t border-stone-50">
           {STORE_CONFIG.showPrices && displayPrice && (
             <div className="text-sm font-bold text-stone-500 mb-3">
-              {displayPrice} {STORE_CONFIG.currency}
-              <span className="text-[10px] block font-normal text-stone-400 mt-0.5">{STORE_CONFIG.indicativePriceText}</span>
+              {displayPrice} {t('currency')}
+              <span className="text-[10px] block font-normal text-stone-400 mt-0.5">{STORE_CONFIG.indicativePriceText[lang]}</span>
             </div>
           )}
           <button 
             onClick={(e) => {
-              e.stopPropagation();
-              onView(product);
+               e.stopPropagation();
+               onView(product);
             }}
             className="w-full py-2.5 bg-espresso text-white rounded-lg text-xs font-bold flex items-center justify-center gap-2 hover:bg-accent transition-colors"
           >
-            عرض التفاصيل
+            {t('viewDetails')}
           </button>
         </div>
       </div>

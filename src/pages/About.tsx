@@ -3,7 +3,10 @@ import { motion } from 'motion/react';
 import { STORE_CONFIG } from '../config';
 import { Award, Users, Target, CheckCircle2, Coffee, Utensils, Hotel, ShoppingCart } from 'lucide-react';
 
+import { useLanguage } from '../context/LanguageContext';
+
 export const About: React.FC = () => {
+  const { t, isRtl } = useLanguage();
   return (
     <div className="pb-20">
       {/* Hero Section */}
@@ -21,10 +24,10 @@ export const About: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-black text-white mb-4"
           >
-            من نحن
+            {t('about')}
           </motion.h1>
           <p className="text-stone-300 max-w-2xl mx-auto font-medium">
-            تعرف على رحلتنا في تقديم أجود المنتجات الغذائية لشركائنا في جميع أنحاء المنطقة.
+            {t('aboutHeroDesc')}
           </p>
         </div>
       </section>
@@ -41,9 +44,9 @@ export const About: React.FC = () => {
             <div className="w-16 h-16 bg-cream rounded-2xl flex items-center justify-center text-accent mx-auto">
               <Target size={32} />
             </div>
-            <h3 className="text-xl font-bold text-espresso">رؤيتنا</h3>
+            <h3 className="text-xl font-bold text-espresso">{t('ourVision')}</h3>
             <p className="text-sm text-stone-500 leading-relaxed">
-              أن نكون المورد الأول والمفضل لقطاع الضيافة والأغذية، من خلال الابتكار المستمر والالتزام بأعلى معايير الجودة.
+              {t('ourVisionDesc')}
             </p>
           </motion.div>
 
@@ -57,9 +60,9 @@ export const About: React.FC = () => {
             <div className="w-16 h-16 bg-cream rounded-2xl flex items-center justify-center text-accent mx-auto">
               <Award size={32} />
             </div>
-            <h3 className="text-xl font-bold text-espresso">رسالتنا</h3>
+            <h3 className="text-xl font-bold text-espresso">{t('ourMission')}</h3>
             <p className="text-sm text-stone-500 leading-relaxed">
-              توفير حلول غذائية متكاملة ومنتجات عالية الجودة تدعم نجاح ونمو أعمال شركائنا في قطاع الأغذية والمشروبات.
+              {t('ourMissionDesc')}
             </p>
           </motion.div>
 
@@ -73,9 +76,9 @@ export const About: React.FC = () => {
             <div className="w-16 h-16 bg-cream rounded-2xl flex items-center justify-center text-accent mx-auto">
               <Users size={32} />
             </div>
-            <h3 className="text-xl font-bold text-espresso">قيمنا</h3>
+            <h3 className="text-xl font-bold text-espresso">{t('ourValues')}</h3>
             <p className="text-sm text-stone-500 leading-relaxed">
-              النزاهة، الجودة، الشراكة المستدامة، والتميز في الخدمة هي الركائز التي نبني عليها علاقتنا مع عملائنا.
+              {t('ourValuesDesc')}
             </p>
           </motion.div>
         </div>
@@ -84,15 +87,15 @@ export const About: React.FC = () => {
       {/* Sectors We Serve */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-black mb-4">القطاعات التي نخدمها</h2>
-          <p className="text-stone-500">نحن فخورون بدعم مجموعة متنوعة من الأعمال في قطاع الأغذية</p>
+          <h2 className="text-3xl font-black mb-4">{t('sectorsWeServe')}</h2>
+          <p className="text-stone-500">{t('sectorsWeServeDesc')}</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { name: 'المقاهي', icon: Coffee },
-            { name: 'المطاعم', icon: Utensils },
-            { name: 'الفنادق', icon: Hotel },
-            { name: 'محلات التجزئة', icon: ShoppingCart },
+            { name: t('cafes'), icon: Coffee },
+            { name: t('restaurants'), icon: Utensils },
+            { name: t('hotels'), icon: Hotel },
+            { name: t('retailStores'), icon: ShoppingCart },
           ].map((sector, idx) => (
             <motion.div 
               key={sector.name}
@@ -117,18 +120,18 @@ export const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <h2 className="text-4xl font-black leading-tight">
-                لماذا تعتبر {STORE_CONFIG.name} <br /> الخيار الأمثل لأعمالكم؟
+                {t('whyChooseUsDetailTitle')}
               </h2>
               <div className="space-y-6">
                 {[
-                  'أكثر من 10 سنوات من الخبرة في قطاع التوريد الغذائي.',
-                  'شبكة توريد عالمية تضمن توفر أفضل المنتجات دائماً.',
-                  'فريق دعم فني متخصص لمساعدة المقاهي والمطاعم.',
-                  'حلول لوجستية متطورة تضمن وصول المنتجات بحالة مثالية.',
+                  t('whyChooseUsDetail1'),
+                  t('whyChooseUsDetail2'),
+                  t('whyChooseUsDetail3'),
+                  t('whyChooseUsDetail4'),
                 ].map((item, idx) => (
                   <motion.div 
                     key={idx}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: isRtl ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}

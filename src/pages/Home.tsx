@@ -8,11 +8,13 @@ import { motion } from 'motion/react';
 import { ArrowLeft, Coffee, Zap, Award, ShieldCheck, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { normalizeCategory, getCategoryTheme, getCategoryImage, CATEGORY_PLACEHOLDER } from '../constants';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = () => {
   const { products, categories, loading, error, retry } = useProductContext();
+  const { t, isRtl } = useLanguage();
   const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
 
   const featuredProducts = products.slice(0, 8);
@@ -29,13 +31,13 @@ export const Home: React.FC<HomeProps> = () => {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 text-center">
         <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 max-w-md">
-          <h2 className="text-xl font-bold mb-2">فشل تحميل المنتجات</h2>
+          <h2 className="text-xl font-bold mb-2">{t('errorLoading')}</h2>
           <p className="text-sm mb-4">{error}</p>
           <button 
             onClick={retry}
             className="px-6 py-2 bg-red-600 text-white rounded-lg font-bold hover:bg-red-700 transition-colors"
           >
-            إعادة المحاولة
+            {t('retry')}
           </button>
         </div>
       </div>
@@ -63,23 +65,23 @@ export const Home: React.FC<HomeProps> = () => {
               className="pt-4"
             >
               <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
-                شريككم الموثوق <br /> <span className="text-accent">في عالم الأغذية</span>
+                {t('heroTitleMain')} <br /> <span className="text-accent">{t('heroTitleAccent')}</span>
               </h1>
               <p className="text-lg text-stone-300 mb-10 leading-relaxed max-w-lg">
-                نحن في {STORE_CONFIG.name} متخصصون في توريد أجود المواد الغذائية والمستلزمات الاحترافية لقطاع المطاعم والمقاهي والفنادق.
+                {t('heroDescription')}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
                   to="/categories"
                   className="px-10 py-4 bg-accent text-espresso rounded-full font-black hover:bg-white transition-all transform hover:-translate-y-1"
                 >
-                  تصفح الكتالوج
+                  {t('browseCatalog')}
                 </Link>
                 <Link 
                   to="/contact"
                   className="px-10 py-4 border-2 border-white/20 text-white rounded-full font-black hover:bg-white/10 transition-all"
                 >
-                  تواصل معنا
+                  {t('contact')}
                 </Link>
               </div>
             </motion.div>
@@ -103,7 +105,7 @@ export const Home: React.FC<HomeProps> = () => {
       {/* Why Choose Us */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-black mb-4">لماذا تختار {STORE_CONFIG.name}؟</h2>
+          <h2 className="text-3xl font-black mb-4">{t('whyChooseUs')}</h2>
           <div className="w-20 h-1.5 bg-accent mx-auto rounded-full"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -111,29 +113,29 @@ export const Home: React.FC<HomeProps> = () => {
             <div className="w-16 h-16 bg-cream rounded-2xl flex items-center justify-center text-accent">
               <Award size={32} />
             </div>
-            <h4 className="font-bold text-xl">جودة مضمونة</h4>
-            <p className="text-sm text-stone-500 leading-relaxed">نختار منتجاتنا بعناية فائقة من أفضل المصادر العالمية لضمان رضا عملائنا.</p>
+            <h4 className="font-bold text-xl">{t('qualityTitle')}</h4>
+            <p className="text-sm text-stone-500 leading-relaxed">{t('qualityDesc')}</p>
           </div>
           <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-stone-100 flex flex-col items-center text-center space-y-4 hover:shadow-md transition-shadow">
             <div className="w-16 h-16 bg-cream rounded-2xl flex items-center justify-center text-accent">
               <Zap size={32} />
             </div>
-            <h4 className="font-bold text-xl">توريد مستمر</h4>
-            <p className="text-sm text-stone-500 leading-relaxed">نلتزم بجداول توريد دقيقة لضمان عدم انقطاع أعمال شركائنا.</p>
+            <h4 className="font-bold text-xl">{t('supplyTitle')}</h4>
+            <p className="text-sm text-stone-500 leading-relaxed">{t('supplyDesc')}</p>
           </div>
           <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-stone-100 flex flex-col items-center text-center space-y-4 hover:shadow-md transition-shadow">
             <div className="w-16 h-16 bg-cream rounded-2xl flex items-center justify-center text-accent">
               <ShieldCheck size={32} />
             </div>
-            <h4 className="font-bold text-xl">أسعار تنافسية</h4>
-            <p className="text-sm text-stone-500 leading-relaxed">نقدم أفضل الأسعار لقطاع الجملة والتوريد لتعزيز ربحية شركائنا.</p>
+            <h4 className="font-bold text-xl">{t('priceTitle')}</h4>
+            <p className="text-sm text-stone-500 leading-relaxed">{t('priceDesc')}</p>
           </div>
           <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-stone-100 flex flex-col items-center text-center space-y-4 hover:shadow-md transition-shadow">
             <div className="w-16 h-16 bg-cream rounded-2xl flex items-center justify-center text-accent">
               <MapPin size={32} />
             </div>
-            <h4 className="font-bold text-xl">تغطية شاملة</h4>
-            <p className="text-sm text-stone-500 leading-relaxed">نخدم قطاعاً واسعاً يشمل المقاهي، المطاعم، الفنادق، ومحلات التجزئة.</p>
+            <h4 className="font-bold text-xl">{t('coverageTitle')}</h4>
+            <p className="text-sm text-stone-500 leading-relaxed">{t('coverageDesc')}</p>
           </div>
         </div>
       </section>
@@ -141,14 +143,13 @@ export const Home: React.FC<HomeProps> = () => {
       {/* Browse by Category */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-black mb-4">تصفح حسب الفئة</h2>
-          <p className="text-stone-500">اكتشف مجموعتنا الواسعة من المنتجات المتخصصة</p>
+          <h2 className="text-3xl font-black mb-4">{t('browseByCategory')}</h2>
+          <p className="text-stone-500">{t('browseByCategoryDesc')}</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {categories.slice(1).map((cat) => {
             const theme = getCategoryTheme(cat);
             const imageUrl = getCategoryImage(cat);
-            console.log("Category:", cat, "Image:", imageUrl);
             
             return (
               <Link 
@@ -179,11 +180,11 @@ export const Home: React.FC<HomeProps> = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-end mb-10">
           <div>
-            <h2 className="text-3xl font-black mb-2">منتجات مختارة</h2>
+            <h2 className="text-3xl font-black mb-2">{t('featuredProducts')}</h2>
             <div className="w-12 h-1 bg-accent rounded-full"></div>
           </div>
           <Link to="/categories" className="text-accent font-bold hover:underline flex items-center gap-1">
-            عرض الكتالوج الكامل <ArrowLeft size={16} />
+            {t('viewFullCatalog')} {isRtl ? <ArrowLeft size={16} /> : <ArrowLeft size={16} className="rotate-180" />}
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -201,8 +202,6 @@ export const Home: React.FC<HomeProps> = () => {
         product={selectedProduct} 
         onClose={() => setSelectedProduct(null)}
       />
-
-
     </div>
   );
 };

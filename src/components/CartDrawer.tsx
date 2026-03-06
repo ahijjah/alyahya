@@ -14,10 +14,13 @@ interface CartDrawerProps {
   subtotal: number;
 }
 
+import { useLanguage } from '../context/LanguageContext';
+
 export const CartDrawer: React.FC<CartDrawerProps> = ({ 
   isOpen, onClose, items, onUpdateQty, onRemove, subtotal 
 }) => {
   const navigate = useNavigate();
+  const { t, isRtl } = useLanguage();
 
   return (
     <AnimatePresence>
@@ -31,16 +34,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
           />
           <motion.div
-            initial={{ x: '100%' }}
+            initial={{ x: isRtl ? '-100%' : '100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
+            exit={{ x: isRtl ? '-100%' : '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-white z-[70] shadow-2xl flex flex-col"
+            className={`fixed top-0 ${isRtl ? 'left-0' : 'right-0'} h-full w-full max-w-md bg-white z-[70] shadow-2xl flex flex-col`}
+            dir={isRtl ? 'rtl' : 'ltr'}
           >
             <div className="p-6 border-bottom border-stone-100 flex justify-between items-center">
               <h2 className="text-xl font-bold flex items-center gap-2">
                 <ShoppingBag size={24} className="text-accent" />
-                سلة التسوق
+                {t('shoppingCart')}
               </h2>
               <button onClick={onClose} className="p-2 hover:bg-stone-100 rounded-full transition-colors">
                 <X size={24} />
@@ -53,12 +57,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   <div className="w-20 h-20 bg-stone-50 rounded-full flex items-center justify-center text-stone-300">
                     <ShoppingBag size={40} />
                   </div>
-                  <p className="text-stone-500 font-medium">سلتك فارغة حالياً</p>
+                  <p className="text-stone-500 font-medium">{t('cartEmpty')}</p>
                   <button 
                     onClick={onClose}
                     className="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold hover:bg-accent transition-colors"
                   >
-                    ابدأ التسوق
+                    {t('startShopping')}
                   </button>
                 </div>
               ) : (
@@ -82,7 +86,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         </button>
                       </div>
                       <p className="text-accent font-bold text-sm mt-1">
-                        {item.selectedPrice} {STORE_CONFIG.currency}
+                        {item.selectedPrice} {t('currency')}
                       </p>
                       <div className="flex items-center gap-3 mt-3">
                         <div className="flex items-center border border-stone-200 rounded-full px-2 py-1">
@@ -110,11 +114,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             {items.length > 0 && (
               <div className="p-6 bg-stone-50 border-t border-stone-100 space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-stone-500 font-medium">المجموع الفرعي</span>
-                  <span className="text-xl font-extrabold">{subtotal} {STORE_CONFIG.currency}</span>
+                  <span className="text-stone-500 font-medium">{t('subtotal')}</span>
+                  <span className="text-xl font-extrabold">{subtotal} {t('currency')}</span>
                 </div>
                 <p className="text-[10px] text-stone-400 text-center">
-                  رسوم الشحن تُحسب عند الدفع
+                  {t('shippingFeesNote')}
                 </p>
                 <button 
                   onClick={() => {
@@ -123,7 +127,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   }}
                   className="w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-accent transition-all transform active:scale-[0.98]"
                 >
-                  إتمام الطلب
+                  {t('checkout')}
                 </button>
               </div>
             )}

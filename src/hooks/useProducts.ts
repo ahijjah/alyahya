@@ -2,8 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import Papa from 'papaparse';
 import { Product } from '../types';
 import { DATA_SOURCE } from '../config';
+import { useLanguage } from '../context/LanguageContext';
 
 export function useProducts() {
+  const { t } = useLanguage();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>(['الكل']);
   const [loading, setLoading] = useState(true);
@@ -35,8 +37,8 @@ export function useProducts() {
           return {
             ...item,
             id: item.id || `prod-${index}`,
-            name: (item.product_name || '').trim() || 'منتج بدون اسم',
-            category: (item.product_category || '').trim() || 'عام',
+            name: (item.product_name || '').trim() || t('unnamedProduct'),
+            category: (item.product_category || '').trim() || t('generalCategory'),
             price: (item.normal_price || '').trim(),
             image: getProductImageUrl(item)
           };
@@ -49,27 +51,27 @@ export function useProducts() {
         setError(null);
       },
       error: (err: any) => {
-        setError(`خطأ في معالجة ملف البيانات: ${err.message}`);
+        setError(`${t('errorParsingData')} ${err.message}`);
         setLoading(false);
       }
     });
-  }, []);
+  }, [t]);
 
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(DATA_SOURCE.csvUrl, { cache: "no-store" });
       if (!response.ok) {
-        throw new Error(`فشل في جلب البيانات (Status: ${response.status})`);
+        throw new Error(`${t('fetchDataFailed')} (Status: ${response.status})`);
       }
       const csvText = await response.text();
       parseCSV(csvText);
     } catch (err: any) {
       console.error('Fetch error:', err);
-      setError(err.message || 'حدث خطأ أثناء تحميل البيانات. يرجى التأكد من اتصال الإنترنت أو المحاولة لاحقاً.');
+      setError(err.message || t('fetchDataError'));
       setLoading(false);
     }
-  }, [parseCSV]);
+  }, [parseCSV, t]);
 
   useEffect(() => {
     fetchProducts();
