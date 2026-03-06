@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  /* Coffee Palette */
+  --color-espresso: #1a0f0a;
+  --color-mocha: #3d2b1f;
+  --color-latte: #c5a059;
+  --color-cream: #fdfaf5;
+  --color-accent: #c5a059;
+  --color-primary: #1a0f0a;
+}
+
+@layer base {
+  html {
+    direction: rtl;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream text-espresso antialiased;
+  }
+  section {
+    scroll-margin-top: var(--header-h, 80px);
+  }
+}
+
+.premium-shadow {
+  box-shadow: 0 10px 30px -10px rgba(26, 15, 10, 0.1);
+}
+
+.glass-effect {
+  @apply bg-white/90 backdrop-blur-md border-b border-stone-100;
+}
+
+.coffee-gradient {
+  background: linear-gradient(135deg, #1a0f0a 0%, #3d2b1f 100%);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-stone-50;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-stone-200 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-stone-300;
+}

@@ -1,0 +1,5 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#F5F5F0"/>
+  <path d="M100 70V130M70 100H130" stroke="#E4E3E0" stroke-width="4" stroke-linecap="round"/>
+  <text x="50%" y="150" text-anchor="middle" fill="#8E9299" font-family="sans-serif" font-size="12">No Image</text>
+</svg>
