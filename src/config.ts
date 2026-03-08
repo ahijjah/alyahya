@@ -21,8 +21,8 @@ export const STORE_CONFIG = {
     en: "Indicative Price"
   },
   contact: {
-    phone: "+966 50 000 0000",
-    whatsapp: "966500000000",
+    phone: "+970 9 267 5259",
+    whatsapp: "970593250208",
     email: "sales@alyahya.ps",
     address: {
       ar: "شارع الاستقلال ، 10 P304 طولكرم فلسطين",
