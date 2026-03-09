@@ -62,11 +62,16 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-reverse space-x-2 flex-shrink-0">
-            <span className="text-2xl font-black tracking-tighter text-espresso uppercase">
-              {STORE_CONFIG.name[lang]}
-            </span>
-            <div className="w-2 h-2 rounded-full bg-accent"></div>
+          <Link to="/" className="logo flex-shrink-0">
+            <img 
+              src="https://alyahya.ps/images/logo-main.png" 
+              alt="AL YAHYA FOODS" 
+              className="h-[45px] md:h-[55px] w-auto block object-contain"
+              referrerPolicy="no-referrer"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
           </Link>
 
           {/* Desktop Navigation */}

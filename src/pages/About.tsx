@@ -124,7 +124,7 @@ export const About: React.FC = () => {
               </h2>
               <div className="space-y-6">
                 {[
-                  t('whyChooseUsDetail1'),
+                  
                   t('whyChooseUsDetail2'),
                   t('whyChooseUsDetail3'),
                   t('whyChooseUsDetail4'),
@@ -146,7 +146,7 @@ export const About: React.FC = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-accent/20 rounded-[3rem] blur-2xl"></div>
               <img 
-                src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&q=80&w=800"
+                src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c??auto=format&fit=crop&q=80&w=800"
                 alt="Our Quality"
                 className="relative rounded-[3rem] shadow-2xl"
               />

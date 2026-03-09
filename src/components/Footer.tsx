@@ -61,11 +61,15 @@ export const Footer: React.FC = () => {
             <ul className="space-y-4 text-stone-400 text-sm">
               <li className="flex items-center gap-3">
                 <Phone size={18} className="text-accent" />
-                <span>{STORE_CONFIG.contact.phone}</span>
+                <a href={`tel:${STORE_CONFIG.contact.phone.replace(/\s/g, '')}`} className="hover:text-accent transition-colors">
+                  {STORE_CONFIG.contact.phone}
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-accent" />
-                <span>{STORE_CONFIG.contact.email}</span>
+                <a href={`mailto:${STORE_CONFIG.contact.email}`} className="hover:text-accent transition-colors">
+                  {STORE_CONFIG.contact.email}
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <MapPin size={18} className="text-accent" />

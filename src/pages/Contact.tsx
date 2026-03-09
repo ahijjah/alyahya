@@ -65,7 +65,9 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-stone-400 font-bold uppercase mb-1">{t('contact')}</p>
-                    <p className="font-bold text-espresso" dir="ltr">{STORE_CONFIG.contact.phone}</p>
+                    <a href={`tel:${STORE_CONFIG.contact.phone.replace(/\s/g, '')}`} className="font-bold text-espresso hover:text-accent transition-colors" dir="ltr">
+                      {STORE_CONFIG.contact.phone}
+                    </a>
                   </div>
                 </div>
 
@@ -75,7 +77,15 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-stone-400 font-bold uppercase mb-1">{t('whatsapp')}</p>
-                    <p className="font-bold text-espresso" dir="ltr">{STORE_CONFIG.contact.whatsapp}</p>
+                    <a 
+                      href={`https://wa.me/${STORE_CONFIG.contact.whatsapp.replace(/\D/g, '')}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="font-bold text-espresso hover:text-accent transition-colors" 
+                      dir="ltr"
+                    >
+                      {STORE_CONFIG.contact.whatsapp}
+                    </a>
                   </div>
                 </div>
 
@@ -85,7 +95,9 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-stone-400 font-bold uppercase mb-1">{t('email')}</p>
-                    <p className="font-bold text-espresso">{STORE_CONFIG.contact.email}</p>
+                    <a href={`mailto:${STORE_CONFIG.contact.email}`} className="font-bold text-espresso hover:text-accent transition-colors">
+                      {STORE_CONFIG.contact.email}
+                    </a>
                   </div>
                 </div>
 

@@ -14,7 +14,7 @@ export const STORE_CONFIG = {
   },
   currency: "₪",
   domain: "alyahya.ps",
-  whatsappNumber: "966500000000",
+  whatsappNumber: "970593250208",
   showPrices: true, // Set to false to hide prices site-wide
   indicativePriceText: {
     ar: "سعر إرشادي",

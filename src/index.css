@@ -35,6 +35,18 @@
   @apply bg-white/90 backdrop-blur-md border-b border-stone-100;
 }
 
+.logo img {
+  height: 55px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    height: 45px;
+  }
+}
+
 .coffee-gradient {
   background: linear-gradient(135deg, #1a0f0a 0%, #3d2b1f 100%);
 }
